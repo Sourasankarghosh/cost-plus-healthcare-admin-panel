@@ -18,16 +18,14 @@ app.use(Express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 // set sessions ,flash and fileupload
-const MemoryStore = session.MemoryStore;
 app.use(session({
     key:process.env.KEY,
     secret:process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    store: new MemoryStore(),
     cookie:{
-        expires: new Date(Date.now() + 86400000),
-        maxAge: 86400000 
+        expires: new Date(Date.now() + 600000000),
+        maxAge: 600000000 
     }
 }))
 
