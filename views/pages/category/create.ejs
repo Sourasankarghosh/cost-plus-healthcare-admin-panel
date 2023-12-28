@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../../layouts/head') %>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <style type="text/css">
+        .message {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+    <div class="wrapper">
+        <%- include('../../layouts/header') %>
+
+            <div class="content-wrapper">
+
+                <section class="content">
+                    <% if(messages.errors) { %>
+                        <p class="alert alert-danger">
+                            <%= messages.errors %>
+                        </p>
+                        <% } %>
+
+                            <% if(messages.success) { %>
+                                <p class="alert alert-success">
+                                    <%= messages.success %>
+                                </p>
+                                <% } %>
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Category Create</h3>
+                                        </div>
+                                        <form role="form" id="category_form" name="category_form" method="post"
+                                            enctype="multipart/form-data" action="/category/create">
+                                            <div class="form-group col-sm-12 col-xs-12">
+                                                <font color="red">*</font> field(s) are required
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="name">Name&nbsp;<font color="red">*</font>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                        placeholder="Enter Name" required minlength="2">
+                                                </div>
+                                            </div>
+                                            <!-- /.box-body -->
+
+                                            <div class="box-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                </section>
+            </div>
+
+            <%- include('../../layouts/sidebar') %>
+
+    </div>
+    <%- include('../../layouts/footer') %>
+
+        <script>
+            $(document).ready(function () {
+                jQuery('form#category_form').validate({
+                    debug: true,
+                    errorClass: 'has-error',
+                    validClass: 'has-success',
+                    highlight: function (element) {
+                        jQuery(element).closest('div').addClass("has-error");
+                    },
+                    unhighlight: function (element) {
+                        jQuery(element).closest('div').removeClass("has-error");
+                    },
+                    errorPlacement: function (error, element) {
+                        jQuery(element).closest('div').append(error);
+                    },
+                    rules: {
+                        name: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "Name is required"
+                        }
+                    },
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../../layouts/head') %>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <style type="text/css">
+        .message {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+    <div class="wrapper">
+        <%- include('../../layouts/header') %>
+
+            <div class="content-wrapper">
+
+                <section class="content">
+                    <% if(messages.errors) { %>
+                        <p class="alert alert-danger">
+                            <%= messages.errors %>
+                        </p>
+                        <% } %>
+
+                            <% if(messages.success) { %>
+                                <p class="alert alert-success">
+                                    <%= messages.success %>
+                                </p>
+                                <% } %>
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Banner Edit</h3>
+                                        </div>
+                                        <form role="form" id="banner_form" name="banner_form" method="post"
+                                            enctype="multipart/form-data" action="/banner/edit">
+                                            <div class="form-group col-sm-12 col-xs-12">
+                                                <font color="red">*</font> field(s) are required
+                                            </div>
+                                            <input type="hidden" name="id" value="<%= banner[0].id %>">
+                                            <div class="form-group">
+                                                <label for="image">Banner Image</label>
+                                                <input type="file" id="input-file-now" name="bannerImage"
+                                                    class="dropify" data-max-file-size="3M" data-show-remove="false"
+                                                    data-show-loader="false" data-show-errors="true"
+                                                    data-errors-position="outside"
+                                                    data-allowed-file-extensions="jpg png gif jpeg tiff"
+                                                    data-default-file="/bannerImages/<%= banner[0].bannerImage_name %>" />
+                                            </div>
+                                            <!-- /.box-body -->
+
+                                            <div class="box-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                </section>
+            </div>
+
+            <%- include('../../layouts/sidebar') %>
+
+    </div>
+    <%- include('../../layouts/footer') %>
+
+        <script>
+            $(document).ready(function () {
+                $('.dropify').dropify();
+                jQuery('form#banner_form').validate({
+                    debug: true,
+                    errorClass: 'has-error',
+                    validClass: 'has-success',
+                    highlight: function (element) {
+                        jQuery(element).closest('div').addClass("has-error");
+                    },
+                    unhighlight: function (element) {
+                        jQuery(element).closest('div').removeClass("has-error");
+                    },
+                    errorPlacement: function (error, element) {
+                        jQuery(element).closest('div').append(error);
+                    },
+                    rules: {
+
+                    },
+                    messages: {
+
+                    },
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
+</body>
+
+</html>

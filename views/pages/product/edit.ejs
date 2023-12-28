@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../../layouts/head') %>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <style type="text/css">
+        .message {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+    <div class="wrapper">
+        <%- include('../../layouts/header') %>
+
+            <div class="content-wrapper">
+
+                <section class="content">
+                    <% if(messages.errors) { %>
+                        <p class="alert alert-danger">
+                            <%= messages.errors %>
+                        </p>
+                        <% } %>
+
+                            <% if(messages.success) { %>
+                                <p class="alert alert-success">
+                                    <%= messages.success %>
+                                </p>
+                                <% } %>
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <div class="container-fluid">
+                                                <div class="row mb-2">
+                                                    <div class="col-sm-12">
+                                                        <ol class="breadcrumb float-sm-right">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="/product/list/<%= category[0].id %>"><b>
+                                                                        <i class="fa fa-arrow-left"
+                                                                            aria-hidden="true"></i>
+                                                                        <%= category[0].name %> - Product Listing
+                                                                    </b></a></li>
+                                                            <li class="breadcrumb-item active">Product Edit</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3 class="box-title">Product Edit</h3>
+                                        </div>
+                                        <div class="content-header">
+                                            <form role="form" id="product_form" name="product_form" method="post"
+                                                enctype="multipart/form-data" action="/product/edit">
+                                                <div class="form-group col-sm-12 col-xs-12">
+                                                    <font color="red">*</font> field(s) are required
+                                                </div>
+                                                <input type="hidden" name="id" value="<%= product[0].id %>">
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="name">Name&nbsp;<font color="red">*</font></label>
+                                                        <input type="text" class="form-control" id="name" name="name"
+                                                            placeholder="Enter Name" required minlength="2"
+                                                            value="<%= product[0].name %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="composition">Composition&nbsp;<font color="red">*
+                                                            </font>
+                                                        </label>
+                                                        <textarea rows="4" cols="50" id="composition" name="composition"
+                                                            class="form-control"><%= product[0].composition %></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="indication">Indication&nbsp;<font color="red">*
+                                                            </font>
+                                                        </label>
+                                                        <textarea rows="4" cols="50" id="indication" name="indication"
+                                                            class="form-control"><%= product[0].indication %></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="packing">Packing&nbsp;<font color="red">*</font>
+                                                        </label>
+                                                        <input type="text" class="form-control" id="packing"
+                                                            name="packing" placeholder="Enter Packing" required
+                                                            minlength="2" value="<%= product[0].packing %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="packType">Pack Type&nbsp;<font color="red">*</font>
+                                                        </label>
+                                                        <input type="text" class="form-control" id="packType"
+                                                            name="packType" placeholder="Enter Pack Type" required
+                                                            minlength="2" value="<%= product[0].packType %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="image">Thumbnail Image</label>
+                                                        <input type="file" id="input-file-now" name="thumbImage"
+                                                            class="dropify" data-max-file-size="3M"
+                                                            data-show-remove="false" data-show-loader="false"
+                                                            data-show-errors="true" data-errors-position="outside"
+                                                            data-allowed-file-extensions="jpg png gif jpeg tiff"
+                                                            data-default-file="/thumbImages/<%= product[0].thumbImage_name %>" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="image">Full Image</label>
+                                                        <input type="file" id="input-file-now" name="fullImage"
+                                                            class="dropify" data-max-file-size="3M"
+                                                            data-show-remove="false" data-show-loader="false"
+                                                            data-show-errors="true" data-errors-position="outside"
+                                                            data-allowed-file-extensions="jpg png gif jpeg tiff"
+                                                            data-default-file="/fullImages/<%= product[0].fullImage_name %>" />
+                                                    </div>
+                                                </div>
+                                                <!-- /.box-body -->
+
+                                                <div class="box-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                </section>
+            </div>
+
+            <%- include('../../layouts/sidebar') %>
+
+    </div>
+    <%- include('../../layouts/footer') %>
+
+        <script>
+            $(document).ready(function () {
+                $('.dropify').dropify();
+                jQuery('form#product_form').validate({
+                    debug: true,
+                    errorClass: 'has-error',
+                    validClass: 'has-success',
+                    highlight: function (element) {
+                        jQuery(element).closest('div').addClass("has-error");
+                    },
+                    unhighlight: function (element) {
+                        jQuery(element).closest('div').removeClass("has-error");
+                    },
+                    errorPlacement: function (error, element) {
+                        jQuery(element).closest('div').append(error);
+                    },
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        composition: {
+                            required: true
+                        },
+                        indication: {
+                            required: true
+                        },
+                        packing: {
+                            required: true
+                        },
+                        packType: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "Name is required"
+                        },
+                        composition: {
+                            required: "Composition is required"
+                        },
+                        indication: {
+                            required: "Indication is required"
+                        },
+                        packing: {
+                            required: "Packing is required"
+                        },
+                        packType: {
+                            required: "Pack Type is required"
+                        }
+                    },
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+
+                $("input[name='status']").on('change', function () {
+                    var status_val = $(this).val();
+                    if (status_val == 'paid') {
+                        $("#amount_div").show();
+                    } else {
+                        $("#amount_div").hide();
+                        $("#amount").val('');
+                    }
+                })
+            });
+        </script>
+</body>
+
+</html>
