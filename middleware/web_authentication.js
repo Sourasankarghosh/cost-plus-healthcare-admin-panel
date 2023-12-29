@@ -5,7 +5,6 @@ module.exports = async function (req, res, next) {
         if (req.cookies[process.env.KEY] && req.cookies[process.env.KEY].authId) {
             const isuserExist = await pool.query('SELECT * FROM users WHERE id = ?', [parseInt(req.cookies[process.env.KEY].authId)]);
             if (isuserExist) {
-                console.log(parseInt(req.cookies[process.env.KEY].authId))
                 next();
             } else {
                 req.flash('errors', 'You are not authorized');
