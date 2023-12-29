@@ -17,10 +17,9 @@ app.use(Express.urlencoded({extended:true}));
 // initialize cookie-parser to allow us access the cookies stored in the browser. 
 app.use(cookieParser());
 
-
 // set sessions ,flash and fileupload
 app.use(session({
-    key:process.env.KEY,
+    key:'site',
     secret:process.env.SECRET,
     rolling: true,
     resave: false,
@@ -30,15 +29,6 @@ app.use(session({
         maxAge: 3600000 
     }
 }));
-
-// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
-// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
-app.use((req, res, next) => {
-    if (req.cookies[process.env.KEY] && !req.session.authId) {
-        res.clearCookie(process.env.KEY);        
-    }
-    next();
-});
 
 app.use(flash());
 app.use(fileUpload());
