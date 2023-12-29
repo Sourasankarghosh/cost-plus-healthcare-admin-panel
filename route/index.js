@@ -6,6 +6,7 @@ const product = require('./product');
 const banner = require('./banner');
 
 const productCategory = require('./api/product-category')
+const enquiry = require('./api/enquiry')
 
 module.exports = (app) => {
   app.use('/', auth);
@@ -15,4 +16,5 @@ module.exports = (app) => {
   app.use('/banner', authentication, banner);
 
   app.use('/api/product-category', productCategory);
+  app.use('/api/enquiry', enquiry);
 }
