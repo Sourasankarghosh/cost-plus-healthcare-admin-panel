@@ -44,15 +44,34 @@
                                                 <font color="red">*</font> field(s) are required
                                             </div>
                                             <input type="hidden" name="id" value="<%= banner[0].id %>">
-                                            <div class="form-group">
-                                                <label for="image">Banner Image</label>
-                                                <input type="file" id="input-file-now" name="bannerImage"
-                                                    class="dropify" data-max-file-size="3M" data-show-remove="false"
-                                                    data-show-loader="false" data-show-errors="true"
-                                                    data-errors-position="outside"
-                                                    data-allowed-file-extensions="jpg png gif jpeg tiff"
-                                                    data-default-file="/bannerImages/<%= banner[0].bannerImage_name %>" />
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="title">Title&nbsp;<font color="red">*</font>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="title" name="title"
+                                                        placeholder="Enter Title" required minlength="2"
+                                                        value="<%= banner[0].title %>" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="description">Description&nbsp;<font color="red">*</font>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="description"
+                                                        name="description" placeholder="Enter Description" required
+                                                        minlength="2" value="<%= banner[0].description %>" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="image">Banner Image</label>
+                                                    <input type="file" id="input-file-now" name="bannerImage"
+                                                        class="dropify" data-max-file-size="3M" data-show-remove="false"
+                                                        data-show-loader="false" data-show-errors="true"
+                                                        data-errors-position="outside"
+                                                        data-allowed-file-extensions="jpg png gif jpeg tiff"
+                                                        data-default-file="/bannerImages/<%= banner[0].bannerImage_name %>" />
+                                                </div>
                                             </div>
+
                                             <!-- /.box-body -->
 
                                             <div class="box-footer">

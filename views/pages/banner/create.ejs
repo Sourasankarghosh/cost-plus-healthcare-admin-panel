@@ -21,14 +21,12 @@
         <%- include('../../layouts/header') %>
 
             <div class="content-wrapper">
-
                 <section class="content">
                     <% if(messages.errors) { %>
                         <p class="alert alert-danger">
                             <%= messages.errors %>
                         </p>
                         <% } %>
-
                             <% if(messages.success) { %>
                                 <p class="alert alert-success">
                                     <%= messages.success %>
@@ -38,11 +36,27 @@
                                         <div class="box-header with-border">
                                             <h3 class="box-title">Banner Create</h3>
                                         </div>
-                                        <div class="content-header">
-                                            <form role="form" id="banner_form" name="banner_form" method="post"
-                                                enctype="multipart/form-data" action="/banner/create">
-                                                <div class="form-group col-sm-12 col-xs-12">
-                                                    <font color="red">*</font> field(s) are required
+
+                                        <form role="form" id="banner_form" name="banner_form" method="post"
+                                            enctype="multipart/form-data" action="/banner/create">
+                                            <div class="form-group col-sm-12 col-xs-12">
+                                                <font color="red">*</font> field(s) are required
+                                            </div>
+
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="title">Title&nbsp;<font color="red">*</font>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="title" name="title"
+                                                        placeholder="Enter Title" required minlength="2" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="description">Description&nbsp;<font color="red">*</font>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="description"
+                                                        name="description" placeholder="Enter Description" required
+                                                        minlength="2" />
                                                 </div>
 
                                                 <div class="form-group">
@@ -55,50 +69,43 @@
                                                         data-allowed-file-extensions="jpg png gif jpeg tiff"
                                                         data-default-file="" required />
                                                 </div>
-                                                <!-- /.box-body -->
+                                            </div>
+                                            <!-- /.box-body -->
 
-                                                <div class="box-footer">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                            <div class="box-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
                                     </div>
                 </section>
             </div>
 
             <%- include('../../layouts/sidebar') %>
-
     </div>
     <%- include('../../layouts/footer') %>
 
         <script>
             $(document).ready(function () {
-                $('.dropify').dropify();
-                jQuery('form#banner_form').validate({
+                $(".dropify").dropify();
+                jQuery("form#banner_form").validate({
                     debug: true,
-                    errorClass: 'has-error',
-                    validClass: 'has-success',
+                    errorClass: "has-error",
+                    validClass: "has-success",
                     highlight: function (element) {
-                        jQuery(element).closest('div').addClass("has-error");
+                        jQuery(element).closest("div").addClass("has-error");
                     },
                     unhighlight: function (element) {
-                        jQuery(element).closest('div').removeClass("has-error");
+                        jQuery(element).closest("div").removeClass("has-error");
                     },
                     errorPlacement: function (error, element) {
-                        jQuery(element).closest('div').append(error);
+                        jQuery(element).closest("div").append(error);
                     },
-                    rules: {
-
-                    },
-                    messages: {
-
-                    },
+                    rules: {},
+                    messages: {},
                     submitHandler: function (form) {
                         form.submit();
-                    }
+                    },
                 });
-
-
             });
         </script>
 </body>
