@@ -35,7 +35,10 @@
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>EmailID</th>
-                    <th>Status</th>
+                    <th>Address</th>
+                    <th>Business Query</th>
+                    <!-- <th>Status</th> -->
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,6 +54,32 @@
       <%- include('../layouts/sidebar') %>
 
   </div>
+
+  <!--modal-->
+  <div class="modal fade" id="moreInfoModal" tabindex="-1" role="dialog" aria-labelledby="moreInfoModal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">More Info</h4>
+        </div>
+        <div class="modal-body">
+          <p><b>Person Name:&nbsp;</b> <span id="name"></span></p>
+          <p><b>Person Mobile No:&nbsp;</b> <span id="mobile"></span></p>
+          <p><b>Person emailID:&nbsp;</b> <span id="emailID"></span></p>
+          <p><b>Person Address:&nbsp;</b> <span id="address"></span></p>
+          <p><b>District Of Distribution:&nbsp;</b> <span id="district_of_distribution"></span></p>
+          <p><b>Pharma Licence Number:&nbsp;</b> <span id="pharma_licence_number"></span></p>
+          <p><b>Purchase Period:&nbsp;</b> <span id="purchase_period"></span></p>
+          <p><b>Investment:&nbsp;</b> <span id="investment"></span></p>
+          <p><b>Preffered Time Of Call Back:&nbsp;</b> <span id="preffered_time_of_call_back"></span></p>
+          <p><b>Profession:&nbsp;</b> <span id="profession"></span></p>
+          <p><b>Business Query:&nbsp;</b> <span id="business_query"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
   <%- include('../layouts/footer') %>
     <!--canvas Chart-->
     <script type="text/javascript">
@@ -63,6 +92,13 @@
           }
         });
       })
+      function moreInfo(data) {
+        $("#moreInfoModal").modal("show");
+        Object.keys(data).forEach(item => {
+          $("#" + item).text(data[item]);
+        });
+
+      }
     </script>
 
 </body>

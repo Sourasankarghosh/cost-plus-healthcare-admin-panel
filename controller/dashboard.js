@@ -4,9 +4,9 @@ const pool = require('../config/database');
 /**
  * Show the dashboard page
  */
-data.index = async function(req,res){    
-    let sidebar = 'dashboard';  
-    return res.render('pages/dashboard',{sidebar:sidebar});  
+data.index = async function (req, res) {
+    let sidebar = 'dashboard';
+    return res.render('pages/dashboard', { sidebar: sidebar });
 }
 
 /**
@@ -20,11 +20,21 @@ data.enquiryDataTable = async function (req, res) {
     let result = [];
     if (enquiriesList.length > 0) {
         enquiriesList.forEach(function (data) {
-            let value = [];            
+            let value = [];
             value.push(data.name)
             value.push(data.mobile)
             value.push(data.emailID)
-            value.push(data.status)
+            value.push(data.address)
+            value.push(data.business_query)
+            // if (data.status = 'not-started') {
+            //     value.push('Not Started')
+            // } else if (data.status = 'completed') {
+            //     value.push('Completed')
+            // } else {
+            //     value.push('In Progress')
+            // }
+            const more_info = "<a href='javascript:moreInfo(" + JSON.stringify(data) + ")' class='btn btn-info btn-xs'><i class='fa fa-info-circle'></i> More Info</a> &nbsp;";
+            value.push(more_info)
             result.push(value);
         })
     }

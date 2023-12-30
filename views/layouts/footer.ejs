@@ -41,23 +41,34 @@
 <!--dropify-->
 <script src="/plugins/dropify/dropify.min.js"></script>
 <!--Jquery validation-->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
 
 <script>
-  $(document).ready(function(){
-      var user_name = $("#user_name").html();
-      $.ajax({
-         method:'get',
-         url:'/user/details',
-         success:function(response){
-           // console.log(response.result);
-           $("#user_name").html(response.result.user_username);
-           $("#user_name").css('textTransform','capitalize');
-         },
-         error:function(message){
-           console.log(message);
-         }
-      });
+  $(document).ready(function () {
+    var user_name = $("#user_name").html();
+    $.ajax({
+      method: 'get',
+      url: '/user/details',
+      success: function (response) {
+        // console.log(response.result);
+        $("#user_name").html(response.result.user_username);
+        $("#user_name").css('textTransform', 'capitalize');
+      },
+      error: function (message) {
+        console.log(message);
+      }
+    });
+
+    setInterval(function () {
+      if ($('p.alert').text()) {
+        $('p.alert').remove()
+      }
+      if ($('div .alert-dismissible').text()) {
+        $('div .alert-dismissible').css('display', 'none')
+      }
+    }, 10000);
   });
 </script>
