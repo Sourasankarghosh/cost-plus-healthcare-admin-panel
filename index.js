@@ -5,6 +5,7 @@ const flash = require('express-flash'),
 session = require('express-session');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // load environment variables
 dotenv.config();
@@ -29,6 +30,9 @@ app.use(session({
         maxAge: 3600000 
     }
 }));
+
+// cros enable
+app.use(cors())
 
 app.use(flash());
 app.use(fileUpload());
